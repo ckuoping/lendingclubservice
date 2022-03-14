@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending Club</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&display=swap" rel="stylesheet">
+
+    <!-- 動態圖表所需資源chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <!-- 動態圖表所需資源amchart -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/spiritedaway.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/frozen.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+
+    <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+    <script src="https://www.amcharts.com/lib/4/geodata/usaLow.js"></script>
+    <!-- 動態圖表所需資源 -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/l_style.css') }}">
+</head>
+
+<body>
+    <!-- 導覽列 -->
+    <div class="container">
+        <div class="row ">
+            <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-flex justify-content-between ">
+                <a class="navbar-brand" href="{{url_for('home')}}">
+                    <img src="{{ url_for('static', filename='logo/Lending_club_logo.png') }}" alt="" width="200px">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link " href="{{url_for('investor')}}">Investor<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link " href="{{url_for('manager')}}">LC manager</a>
+                        <a class="nav-item nav-link active" href="{{url_for('loandata')}}">Loan Data</a>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- 首頁大圖 -->
+    <!-- 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="box col-12">
+                jjjjjjjjjjj
+            </div>
+        </div>
+    </div>
+    -->
+    <div class="container-fluid canvas">
+        <div class="row justify-content-center ">
+            <div class="jumbotron  col-12 mb-0 bg">
+            </div>
+        </div>
+    </div>
+
+    <!-- 內容 -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 px-0">
+                <h2 class="main-title">Data Visualization</h2>
+                <h2>of Issued Loan</h2>
+                <div class="title-baseline"></div>
+            </div>
+            <div class="info">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque qui deleniti facilis sapiente laboriosam cumque eius? Similique fugiat tempore vel, molestias quos libero beatae repudiandae minus iusto nemo modi accusamus deserunt natus perspiciatis placeat
+                nobis quis suscipit pariatur necessitatibus voluptatum!
+            </div>
+        </div>
+    </div>
+
+    <!-- 動態圖表 -->
+    <div class="container">
+        <!-- grade & disbursement -->
+        <div class="row ">
+            <div class="col-12 my-5 pattern-name">Issued Loan Amount by States</div>
+        </div>
+        <div class="row">
+            <div class="col-12 ">California, Texas, New York and Florida are top 4 states of highest amount of loan requests. <br>1. These states are also the states of LARGEST POPULATION in United States.
+                <br>2. These states are where MOST ASIAN people dwell in.
+                <br>3. These states are the states with HIGHEST TOTAL GDP in United States. </div>
+        </div>
+        <div class="row mt-3">
+            <div id="us-state-chart" class="col-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-12 my-5 pattern-name">Grade of Borrowers by Years</div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-5"><i class="far fa-smile"></i> A: The Best Grade<br><i class="far fa-frown"></i> E, F, G: The Worst Grade</div>
+        </div>
+        <div class="row">
+            <div id="grade-year-chart" class="col-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-6 my-5 pattern-name">Percentage of Different Loan Status</div>
+        </div>
+        <div class="row">
+            <div class="col-6 my-5 ">The percentage of borrowers of bad loan (charged off, grace period and late) is around 12 %; while the percentage of borrowers of good loan is around 88 % (fully paid and current). Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Iure inventore minima atque temporibus quasi dolore sed facere delectus ratione sapiente excepturi, officia dolorem accusamus explicabo ad? Optio soluta consequatur repellendus.</div>
+            <div id="loan-status-chart" class="col-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-6 my-5 pattern-name">Level of Delinquency</div>
+        </div>
+        <div class="row">
+            <div id="delinquency-chart" class="col-8"></div>
+            <div class="col-4 my-5 ">For the borrowers of bad loan, the highest level of their delinquency is 13 to 24 months ( 1 to 2 years). The second level of the delinquency is 6 to 12 months. Lorem ipsum dolor sit amet consectetur adipisicing elit. Error repellat reprehenderit
+                est ea harum molestias accusantium quod consectetur voluptatibus velit voluptatum sit, adipisci illum. Aliquid ab animi eius nam itaque?
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 動態圖表 -->
+    <script src="{{ url_for('static',filename='js/l_action.js') }}"></script>
+    <!-- jquery.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js "></script>
+    <!-- popper.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <!-- bootstrap.min.js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+</body>
+
+</html>

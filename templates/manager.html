@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending Club</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&display=swap" rel="stylesheet">
+
+    <!-- 動態圖表所需資源chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <!-- 動態圖表所需資源amchart -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/spiritedaway.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/frozen.js"></script>
+    <!-- 動態圖表所需資源 -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/m_style.css') }}">
+</head>
+
+<body>
+    <!-- 導覽列 -->
+    <div class="container">
+        <div class="row ">
+            <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-flex justify-content-between ">
+                <a class="navbar-brand" href="{{url_for('home')}}">
+                    <img src="{{ url_for('static', filename='logo/Lending_club_logo.png') }}" alt="" width="200px">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link " href="{{url_for('investor')}}">Investor<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link  active" href="{{url_for('manager')}}">LC manager</a>
+                        <a class="nav-item nav-link" href="{{url_for('loandata')}}">Loan Data</a>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- 首頁大圖 -->
+    <!-- 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="box col-12">
+                jjjjjjjjjjj
+            </div>
+        </div>
+    </div>
+    -->
+    <div class="container-fluid canvas">
+        <div class="row justify-content-center ">
+            <div class="jumbotron  col-12 mb-0 bg">
+            </div>
+        </div>
+    </div>
+
+    <!-- 內容 -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title">
+                <h2 class="text-center">Lending Club Manager</h2>
+                <div class="title-baseline"></div>
+                <h3 class="text-center mt-3">Pattern of Borrowers of Bad Loan</h3>
+            </div>
+            <div class="info">
+                As the manager from Lending Club, you will be able to find useful information from following visualization analysis which will illustrate the bad loan rate in 6 crucial categories, including grade, disbursement methods, loan purpose, terms, home ownership
+                and verification status. Referring this data allows you to know the status of each loan better.
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 動態圖表 -->
+    <div class="container">
+        <!-- grade & disbursement -->
+        <div class="row ">
+            <div class="col-6 text-center mt-5 pattern-name">Bad Loan Rate under Different Grade</div>
+            <div class="col-6 text-center mt-5 pattern-name">Bad Loan Rate of Disbursement Methods</div>
+        </div>
+        <div class="row">
+            <div class="col-6 text-center mt-2 ">Borrowers of high bad loan rate may be the ones of<br> GRADE D, E, F, G ( lowest grade ).</div>
+            <div class="col-6 text-center mt-2 ">Borrowers of high bad loan rate prefer to <br>receive their loans in CASH.</div>
+        </div>
+        <div class="row">
+            <div id="grade-chart" class="col-6"></div>
+            <div id="pie-container" class="col-6">
+                <canvas id="pie-chart"></canvas>
+            </div>
+        </div>
+
+        <!-- purpose -->
+        <div class="row">
+            <div class="col-12 text-center mt-5 pattern-name">Bad Loan Rate of Different Loan Purposes</div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">Unlike typical loan purposes, borrowers of high bad loan rate use their loans for the purpose of major daily consumption <br>such as EDUCATION, BUSINESS, WEDDING, MOVING and VACATION.</div>
+        </div>
+        <div class="row">
+            <div id="purpose-chart"></div>
+        </div>
+
+        <!-- term & ownership & verification -->
+        <div class="row">
+            <div class="col-12 text-center my-5 pattern-name">Bad Loan Rate of Terms, Home Ownership and Verification Status</div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">Borrowers of high bad loan rate may prefer to pay their installment in 60 MONTHS. Also, they may not have their OWN housing properties.<br>However, their propeties might still have been VERIFIED.</div>
+        </div>
+        <div class="row">
+            <div id="term-container" class="col-4">
+                <canvas id="term-chart"></canvas>
+            </div>
+            <div id="term-container" class="col-4">
+                <canvas id="ownership-chart"></canvas>
+            </div>
+            <div id="term-container" class="col-4">
+                <canvas id="verification-chart"></canvas>
+            </div>
+        </div>
+        <!-- causes of bad loans -->
+        <div class="row">
+            <div class="col-12 text-center mb-5 pattern-name factors-conclusion">Major Factors of Loan Status</div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="box-inline">Grade</div>
+            <div class="box-inline">Disbursement Methods</div>
+            <div class="box-inline">Interest Rate</div>
+            <div class="box-inline">Consumption to Credit Limit</div>
+            <div class="box-inline">Dept of Revolving Accounts</div>
+            <div class="box-inline">Balance of Revolving Accounts</div>
+            <div class="box-inline">Term</div>
+            <div class="box-inline">Purpose</div>
+        </div>
+        <div class="row my-5">
+            <div id="relation-chart" class="col-12"></div>
+        </div>
+
+    </div>
+
+
+
+    <!-- 動態圖表 -->
+    <script src="{{ url_for('static',filename='js/m_action.js') }}"></script>
+    <!-- jquery.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js "></script>
+    <!-- popper.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <!-- bootstrap.min.js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+</body>
+
+</html>

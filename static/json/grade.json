@@ -1,0 +1,29 @@
+[{
+        "grade": "grade A",
+        "score": 0.035
+    },
+    {
+        "grade": "grade B",
+        "score": 0.084
+    },
+    {
+        "grade": "grade C",
+        "score": 0.145
+    },
+    {
+        "grade": "grade D",
+        "score": 0.205
+    },
+    {
+        "grade": "grade E",
+        "score": 0.268
+    },
+    {
+        "grade": "grade F",
+        "score": 0.352
+    },
+    {
+        "grade": "grade G",
+        "score": 0.428
+    }
+]

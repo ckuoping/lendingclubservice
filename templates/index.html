@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending Club</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Heebo:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+
+<body>
+
+    <!--  
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark px-lg-5 px-md-3 row fixed-top">
+            
+            <a class="navbar-brand ml-5" href="#">
+                <img src="./logo/Lending_club_logo.png" alt="" width="200px">
+            </a>
+            
+            <button class="navbar-toggler d-lg-none mr-3" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link ml-2" href="#introSection">Owner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-2" href="#featuresSection">Investor</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+ -->
+    <!-- 導覽列 -->
+    <div class="container">
+        <div class="row ">
+            <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-flex justify-content-between ">
+                <a class="navbar-brand" href="{{url_for('home')}}">
+                    <img src="{{ url_for('static', filename='logo/Lending_club_logo.png') }}" alt="" width="200px">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link " href="{{url_for('investor')}}">Investor<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="{{url_for('manager')}}">LC manager</a>
+                        <a class="nav-item nav-link" href="{{url_for('loandata')}}">Loan Data</a>
+
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- 首頁大圖 -->
+    <header id="header" class="jumbotron bg-dark text-white text-center">
+        <div class="container  wow bounceInUp">
+            <h1 class="text-left col-12 ml-0">Building something <span class="h1-bigger "> remarkable</span></h1>
+            <p class="text-left col-12 ml-0">We help stakeholders to evaluate their investments</p>
+
+        </div>
+    </header>
+
+    <!-- 服務 -->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8 text-center">
+                <h2 class="what-title my-5 ">What we provide...</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div id="service-group" class="col-8 d-flex flex-row justify-content-center ">
+                <div id="service" class="col-4 text-center">
+                    <div class="pt-5 pb-3"><i class="far fa-clock"></i></div>
+                    <h4>efficiency</h4>
+                    <div class="pb-5">Compared with traditional methods, our computational data analytics techniques can save significant amount of time.</div>
+                </div>
+                <div id="service" class="col-4 text-center main-service">
+                    <div class="pt-5 pb-3"><i class="far fa-check-square"></i></div>
+                    <h4>accuracy</h4>
+                    <div class="pb-5">With our cutting-edge algorithms and optimized prediction models, it carries out result with high precision and reduce human bias.</div>
+                </div>
+                <div id="service" class="col-4 text-center">
+                    <div class="pt-5 pb-3"><i class="fas fa-chart-bar"></i></div>
+                    <h4>Reliability</h4>
+                    <div class="pb-5">We are committed to offering highest quality service and focusing on high reliability to all our customers.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 腳色 -->
+    <div id="roles" class="container-fluid ">
+        <div class="row justify-content-center ">
+            <div class="col-8">
+                <h2 class="if-title my-5 pt-5 ">If you are...</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-md-4 col-sm-4 col-8 ">
+                <!-- 設定使用者照片變圓型 -->
+                <img class="w-100 rounded-circle " src="{{ url_for('static', filename='img/owner.jpg') }}" alt="user photo ">
+            </div>
+            <div class="col-md-4 col-sm-4 col-8 ">
+                <h3 class="title ">Lending Club Manager</h3>
+
+                <p>Our platform is committed to correctly identifying defaulters so that Lending Club can decide whether a person is fit for sanctioning a loan or not. accusantium culpa voluptas ipsam nisi non id neque atque minus qui, natus ducimus dolores
+                    est, dolor beatae? Quis esse eius facilis minima aut cum vero ex dolore obcaecati sint?
+                </p>
+                <a class="btn btn-dark " href="{{url_for('manager')}}" role="button ">more</a>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-md-4 col-sm-4 col-8 ">
+                <h3 class="title ">Investor</h3>
+
+                <p>The main goal of our service is to help investors to lower their own risks and maximize the return profits on choosing appropriate loan. accusantium culpa voluptas ipsam nisi non id neque atque minus qui, natus ducimus dolores est, dolor
+                    beatae? Quis esse eius facilis minima aut cum vero ex dolore obcaecati sint?
+                </p>
+                <a class="btn btn-dark " href="{{url_for('investor')}}" role="button ">more</a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-8 ">
+                <!-- 設定使用者照片變圓型 -->
+                <img class="w-100 rounded-circle " src="{{ url_for('static', filename='img/investor.jpg') }}" alt="user photo ">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jquery.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js "></script>
+    <!-- popper.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <!-- bootstrap.min.js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="{{ url_for('static',filename='main.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+    body {
+        font-family: Arial, Helvetica, sans-serif, "Microsoft JhengHei", "微軟正黑體";
+        background-color: rgb(235, 235, 235);
+    }
+    /* 導覽列 */
+    
+    #nav {
+        padding: 8px 50px;
+    }
+    /* 首頁大圖 */
+    
+    .canvas {
+        margin-top: 50px;
+    }
+    
+    .bg {
+        background-image: url("../img/investorHeader.jpg");
+        background-position: bottom 50% right;
+        background-size: cover;
+        opacity: 0.9;
+        filter: grayscale(50%);
+        /* background-attachment: fixed; */
+        padding: 180px 0px;
+    }
+    /* 標題 */
+    
+    .title {
+        margin-top: 150px;
+    }
+    
+    .title h2 {
+        margin-bottom: 40px;
+        font-size: 42px;
+        font-family: 'Yeseva One', cursive;
+        /* font-family: 'Heebo', sans-serif; */
+    }
+    
+    .title-baseline {
+        width: 300px;
+        height: 8px;
+        background-color: rgb(65, 65, 65);
+        margin: 0px auto;
+    }
+    
+    .title h3 {
+        margin-bottom: 10px;
+        /* font-size: 42px; */
+        font-family: 'Yeseva One', cursive;
+        /* font-family: 'Heebo', sans-serif; */
+    }
+    
+    .info {
+        font-size: 22px;
+        line-height: 30px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    /* 動態圖表 */
+    /* 標題字 */
+    
+    .pattern-name {
+        font-family: 'Heebo', sans-serif;
+        font-size: 22px;
+    }
+    
+    .factors-conclusion {
+        font-size: 42px;
+        font-family: 'Yeseva One', cursive;
+        margin-top: 150px;
+    }
+    
+    .box-inline {
+        display: inline;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        background-color: cadetblue;
+        padding: 10px 20px 10px 20px;
+        margin: 8px 15px 8px 15px;
+        border-radius: 30px;
+    }
+    /* 圖表設計 */
+    
+    #grade-chart {
+        width: 100%;
+        height: 560px;
+    }
+    
+    #pie-container {
+        height: 460px;
+        /* width: 200vw; */
+    }
+    
+    #pie-chart {
+        margin-top: 30px;
+        /* width: 100%; */
+        /* height: 450px; */
+        /* transform: scale(1.5, 1.5); */
+    }
+    
+    #term-container {
+        height: 300px;
+    }
+    
+    #relation-chart {
+        width: 100%;
+        height: 600px;
+    }
+    
+    #purpose-chart {
+        width: 100%;
+        height: 700px;
+    }
